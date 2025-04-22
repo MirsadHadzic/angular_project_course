@@ -7,7 +7,7 @@
 </div> -->
 
 <div>
-    <button (click)="onSelectUser()">
+    <button [class.active]="selected" (click)="onSelectUser()">
         <!-- kod signalnih vrijednosti, da ne bi doslo do warninga, moraju se staviti brackets da bi bilo u redu -->
     <img [src]="imagePath" 
          [alt] = "user.name"/>
