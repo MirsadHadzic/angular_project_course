@@ -5,6 +5,20 @@ import { computeMsgId } from '@angular/compiler';
 
 // const randomIndex = Math.floor(Math.random() * DUMMY_USERS.length);
 
+// type User = 
+// {
+//   id: string;
+//   avatar: string;
+//   name: string;
+// }
+
+interface User
+{
+  id: string;
+  avatar: string;
+  name: string;
+}
+
 @Component({
   selector: 'app-user',
   standalone: true,
@@ -12,13 +26,19 @@ import { computeMsgId } from '@angular/compiler';
   styleUrl: './user.component.css'
 })
 export class UserComponent {
-  @Input({required: true}) id!: string
-  @Input({required: true}) avatar!: string;
-  // // definitely will be a string value 
-  @Input({required: true}) name!: string;
-  // selectedUser = signal(DUMMY_USERS[randomIndex]);
-  // imagePath = computed(() => './assets/users/' + this.selectedUser().avatar);
-  @Output() select = new EventEmitter();
+  @Input ({required: true}) user!: User;
+  // {
+  //   id: string;
+  //   avatar: string;
+  //   name: string;
+  // };
+  // // @Input({required: true}) id!: string
+  // @Input({required: true}) avatar!: string;
+  // // // definitely will be a string value 
+  // @Input({required: true}) name!: string;
+  // // selectedUser = signal(DUMMY_USERS[randomIndex]);
+  // // imagePath = computed(() => './assets/users/' + this.selectedUser().avatar);
+  @Output() select = new EventEmitter<string>();
 
 
   // imagePath = computed(() => {
@@ -27,13 +47,13 @@ export class UserComponent {
 
   get imagePath()
   {
-    return 'assets/users/' + this.avatar;
+    return 'assets/users/' + this.user.avatar;
   }
 
   onSelectUser() 
   {
     // this.avatar.set();
-    this.select.emit(this.id);
+    this.select.emit(this.user.id);
   }
 
 }
