@@ -28,6 +28,17 @@ export class TasksService {
       }
     ];
 
+    constructor(){
+        const tasks = localStorage.getItem('tasks');
+
+        // also, don't fckn forget a converting them to JSON first
+        // overwriting the task from the task from local fckn storage
+        if (tasks) {
+            // converting the tasks from JSON back to the array
+            this.tasks = JSON.parse(tasks);
+        }
+    }
+
     getUserTasks(userId: string)
     {
         return this.tasks.filter((task) => task.userId === userId);
@@ -43,11 +54,16 @@ export class TasksService {
         summary: taskData.summary,
         dueDate: taskData.date
       });
-  
+      this.saveTasks();
     }
 
     removeTask(id: string){
         this.tasks = this.tasks.filter((task) => task.id !== id);
+        this.saveTasks();
     }
 
+    private saveTasks()
+    {
+        localStorage.setItem('tasks', JSON.stringify(this.tasks));
+    }
 }
