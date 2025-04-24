@@ -6,11 +6,13 @@
     </button>
 </div> -->
 
-<div>
+<!-- <div> -->
+<app-card>
     <button [class.active]="selected" (click)="onSelectUser()">
         <!-- kod signalnih vrijednosti, da ne bi doslo do warninga, moraju se staviti brackets da bi bilo u redu -->
     <img [src]="imagePath" 
          [alt] = "user.name"/>
         <span>{{ user.name }}</span>
     </button>
-</div>
+</app-card>
+<!-- </div> -->
