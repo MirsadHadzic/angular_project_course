@@ -3,6 +3,7 @@ import { TaskComponent } from "./task/task.component";
 import { identifierName } from '@angular/compiler';
 import { Title } from '@angular/platform-browser';
 import { NewTaskComponent } from "./new-task/new-task.component";
+import { type NewTaskData } from './task/task.model';
 
 @Component({
   selector: 'app-tasks',
@@ -57,4 +58,19 @@ export class TasksComponent {
   {
     this.isAddingTask = false;
   } 
+
+  onAddTask(taskData: NewTaskData)
+  {
+    // instead of push we can put unshift
+    this.tasks.unshift({
+      id: new Date().getTime().toString(),
+      userId: this.userId,
+      title: taskData.title,
+      summary: taskData.summary,
+      dueDate: taskData.date
+    });
+
+    // for closing the dialog
+    this.isAddingTask = false;
+  }
 }
