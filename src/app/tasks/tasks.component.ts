@@ -4,6 +4,7 @@ import { identifierName } from '@angular/compiler';
 import { Title } from '@angular/platform-browser';
 import { NewTaskComponent } from "./new-task/new-task.component";
 import { type NewTaskData } from './task/task.model';
+import { TasksService } from './tasks.service';
 
 @Component({
   selector: 'app-tasks',
@@ -15,38 +16,22 @@ export class TasksComponent {
   @Input({required: true}) userId!: string;
   @Input({required: true}) name?: string;
   isAddingTask = false;
-  tasks = 
-  [
-    {
-      id: 't1',
-      userId: 'u1',
-      title: 'Master Angular',
-      summary: "Learn all the basic and advanced features of Angular & how to apply them.", 
-      dueDate: '2025-12-31'
-    },
-    {
-      id: 't2',
-      userId: 'u2',
-      title: 'Master Angularr',
-      summary: "Learn all the basic and advanced features of Angular & how to apply them.", 
-      dueDate: '2025-10-31'
-    },
-    {
-      id: 't3',
-      userId: 'u3',
-      title: 'Master Angularrr',
-      summary: "Learn all the basic and advanced features of Angular & how to apply them.", 
-      dueDate: '2025-11-31'
-    }
-  ];
+  // umjesto ovakve instance klase, uzet cemo konstruktor, puno bolje
+  // private tasksService = new TasksService();
+  // private tasksService: TasksService;
+  
+  constructor(private tasksService: TasksService){
+    // this.tasksService = tasksService;
+  }
 
   get SelectedUserTasks()
   {
-    return this.tasks.filter((task) => task.userId === this.userId);
+    // return this.tasks.filter((task) => task.userId === this.userId);
+    return this.tasksService.getUserTasks(this.userId);
   }
 
   onCompleteTask(id: string){
-    this.tasks = this.tasks.filter((task) => task.id !== id);
+    
   }
 
   onStartAddTask() 
@@ -54,23 +39,27 @@ export class TasksComponent {
     this.isAddingTask = true;
   }
 
-  onCancelAddTask()
+  onCloseAddTask()
   {
     this.isAddingTask = false;
   } 
 
-  onAddTask(taskData: NewTaskData)
-  {
-    // instead of push we can put unshift
-    this.tasks.unshift({
-      id: new Date().getTime().toString(),
-      userId: this.userId,
-      title: taskData.title,
-      summary: taskData.summary,
-      dueDate: taskData.date
-    });
+  // onAddTask(taskData: NewTaskData)
+  // {
+  //   // // instead of push we can put unshift
+  //   // this.tasks.unshift({
+  //   //   id: new Date().getTime().toString(),
+  //   //   userId: this.userId,
+  //   //   title: taskData.title,
+  //   //   summary: taskData.summary,
+  //   //   dueDate: taskData.date
+  //   // });
 
-    // for closing the dialog
-    this.isAddingTask = false;
-  }
+  //   // // for closing the dialog
+  //   // this.isAddingTask = false;
+  //   this.isAddingTask = false;
+  // }
+
+
+  
 }
