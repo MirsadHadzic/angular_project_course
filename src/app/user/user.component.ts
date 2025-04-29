@@ -3,7 +3,7 @@ import { Component, EventEmitter, Input, Output, computed, input} from '@angular
 import { DUMMY_USERS } from '../dummy-users';
 import { computeMsgId } from '@angular/compiler';
 import { type User } from './user.model';
-import { CardComponent } from "../shared/card/card.component";
+
 
 // const randomIndex = Math.floor(Math.random() * DUMMY_USERS.length);
 
@@ -20,13 +20,13 @@ import { CardComponent } from "../shared/card/card.component";
 //   avatar: string;
 //   name: string;
 // }
-
+// VELIKA RAZLIKA IZMEJDU STADNALONE COMPONENTA I OVIH DRUGIH, NPR. OVDJE BRISEM IMPORTS ARRAY KAD HOCU DA MIGRIRAM KOMPONENTE DA KORISTE MODULES
 @Component({
   selector: 'app-user',
-  standalone: true,
+  standalone: false,
   templateUrl: './user.component.html',
   styleUrl: './user.component.css',
-  imports: [CardComponent]
+  // imports: [CardComponent]
 })
 export class UserComponent {
   @Input ({required: true}) user!: User;
