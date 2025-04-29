@@ -5,6 +5,7 @@ import { UserComponent } from './user/user.component';
 import { TasksComponent } from './tasks/tasks.component';
 // import { BrowserModule } from @angular/platformBrowser
 import { BrowserModule } from '@angular/platform-browser';
+import { SharedModule } from './shared/shared.module';
 
 // group components together
 // standalone components can't be added to the declarations, that's why we use it in import array instead of the declarations array
@@ -12,6 +13,6 @@ import { BrowserModule } from '@angular/platform-browser';
 @NgModule({
     declarations: [AppComponent],
     bootstrap: [AppComponent],
-    imports: [BrowserModule, HeaderComponent, UserComponent, TasksComponent]
+    imports: [BrowserModule, HeaderComponent, UserComponent, TasksComponent, SharedModule]
 })
 export class AppModule {}
